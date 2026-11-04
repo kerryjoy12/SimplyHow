@@ -290,6 +290,29 @@ p { margin: 0 0 1.15rem; }
   background: var(--bg);
   display: block;
 }
+/* Photos are shown crisp at their own resolution, over a blurred copy of
+   themselves, so a small source still fills the tile without being stretched. */
+.card-thumb--photo {
+  position: relative;
+  background-image: none;
+  background-color: #e9e7e2;
+}
+.card-thumb--photo::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background-image: var(--thumb-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px) saturate(1.1) brightness(0.82);
+  transform: scale(1.1);
+}
+.card-thumb--photo img {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.28));
+}
 .card-thumb span { color: rgba(255, 255, 255, 0.92); font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; }
 .card-thumb--technology { background-color: #4f46e5; }
 .card-thumb--home-garden { background-color: #059669; }
@@ -387,6 +410,33 @@ p { margin: 0 0 1.15rem; }
   display: block;
   margin-inline: auto;
   border-radius: var(--radius);
+}
+/* Same treatment on article pages: a tall blurred banner, photo on top at its
+   natural size so no pixels are invented. */
+.post-cover-wrap--photo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(140px, 22vw, 220px);
+  padding: clamp(1rem, 3vw, 2rem);
+  background: #e9e7e2;
+}
+.post-cover-wrap--photo::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background-image: var(--cover-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.1) brightness(0.75);
+  transform: scale(1.15);
+}
+.post-cover-wrap--photo .post-cover {
+  position: relative;
+  z-index: 1;
+  max-height: 100%;
+  border-radius: 6px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 .post-header { max-width: 780px; padding-top: 1.75rem; }
 .post-header h1 { margin-top: 0.6rem; }
