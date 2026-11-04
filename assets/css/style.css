@@ -379,12 +379,14 @@ p { margin: 0 0 1.15rem; }
   box-shadow: var(--shadow);
 }
 .post-cover {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
   max-height: clamp(220px, 46vw, 460px);
   object-fit: contain;
   display: block;
   margin-inline: auto;
+  border-radius: var(--radius);
 }
 .post-header { max-width: 780px; padding-top: 1.75rem; }
 .post-header h1 { margin-top: 0.6rem; }

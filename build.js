@@ -49,14 +49,14 @@ const articles = loadArticles(path.join(ROOT, 'content', 'articles'));
 const pages = loadPages(path.join(ROOT, 'content', 'pages'));
 
 // Apply cover-image catalog (public/admin/thumbnails.json) into article frontmatter.
-// Existing coverImage values already in an article file take priority.
+// The catalog is what the admin writes, so a cover saved there wins; articles
+// with no catalog entry keep whatever coverImage their file already declares.
 const catalogPath = path.join(ROOT, 'public', 'admin', 'thumbnails.json');
 if (fs.existsSync(catalogPath)) {
   const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
   const rows = Array.isArray(catalog?.rows) ? catalog.rows : [];
   const catalogMap = Object.fromEntries(rows.map((r) => [r.slug, String(r.coverImage || '').trim()]));
   for (const a of articles) {
-    if (a.coverImage) continue; // already set in content — keep it
     const catalogUrl = catalogMap[a.slug];
     if (catalogUrl) a.coverImage = catalogUrl;
   }
