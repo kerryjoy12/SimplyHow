@@ -156,14 +156,32 @@ function handleUpload(req, res) {
     .catch((err) => sendJson(res, 400, { error: String(err.message || err) }));
 }
 
-function serveFile(res, filePath) {
+function serveFile(req, res, filePath, urlPath) {
   const stat = fs.statSync(filePath);
   const type = TYPES[path.extname(filePath).toLowerCase()] || 'application/octet-stream';
+  const etag = 'W/"' + stat.size.toString(16) + '-' + Math.floor(stat.mtimeMs).toString(16) + '"';
+  // Images and stylesheets rarely change under the same path, HTML changes on
+  // every build: cache the heavy stuff and revalidate the pages cheaply.
+  const longLived = urlPath.startsWith('/uploads/') || urlPath.startsWith('/assets/');
+  const cacheControl = longLived ? 'public, max-age=604800, stale-while-revalidate=86400' : 'no-cache';
+
+  if (req.headers['if-none-match'] === etag) {
+    res.writeHead(304, { ETag: etag, 'Cache-Control': cacheControl });
+    res.end();
+    return;
+  }
+
   res.writeHead(200, {
     'Content-Type': type,
     'Content-Length': String(stat.size),
-    'Cache-Control': 'no-cache'
+    'Cache-Control': cacheControl,
+    ETag: etag,
+    'Last-Modified': stat.mtime.toUTCString()
   });
+  if (req.method === 'HEAD') {
+    res.end();
+    return;
+  }
   fs.createReadStream(filePath).pipe(res);
 }
 
@@ -225,7 +243,7 @@ const server = http.createServer((req, res) => {
   }
   if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) return notFound(res);
 
-  serveFile(res, filePath);
+  serveFile(req, res, filePath, urlPath);
 });
 
 server.listen(PORT, HOST, () => {

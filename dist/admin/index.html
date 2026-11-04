@@ -389,6 +389,42 @@
         });
       }
 
+      // Covers are never displayed wider than this, so a 4000px photo only
+      // wastes bandwidth. Rasters get scaled down and re-encoded as WebP in
+      // the browser before they are uploaded.
+      var MAX_EDGE = 1600;
+      var SKIP_UNDER_BYTES = 350 * 1024;
+
+      function kb(bytes) { return Math.max(1, Math.round(bytes / 1024)); }
+
+      function downscale(dataUrl, file) {
+        if (!/^image\/(jpeg|png|webp)$/.test(file.type)) return Promise.resolve(null);
+        return new Promise(function (resolve) {
+          var img = new Image();
+          img.onload = function () {
+            try {
+              var longest = Math.max(img.naturalWidth, img.naturalHeight);
+              var scale = longest > MAX_EDGE ? MAX_EDGE / longest : 1;
+              if (scale === 1 && file.size <= SKIP_UNDER_BYTES) return resolve(null);
+              var canvas = document.createElement('canvas');
+              canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+              canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+              var ctx = canvas.getContext('2d');
+              ctx.imageSmoothingEnabled = true;
+              ctx.imageSmoothingQuality = 'high';
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              var out = canvas.toDataURL('image/webp', 0.82);
+              // Some browsers fall back to PNG for toDataURL('image/webp').
+              if (!out || out.indexOf('data:image/webp') !== 0) return resolve(null);
+              if (out.length >= dataUrl.length) return resolve(null);
+              resolve({ dataUrl: out, filename: file.name.replace(/\.[^.]+$/, '') + '.webp' });
+            } catch (e) { resolve(null); }
+          };
+          img.onerror = function () { resolve(null); };
+          img.src = dataUrl;
+        });
+      }
+
       function handleFile(file) {
         if (!file) return;
         if (!/^image\//.test(file.type) && !/\.(jpe?g|png|webp|gif|svg)$/i.test(file.name)) {
@@ -399,11 +435,18 @@
           setStatus('That image is ' + Math.round(file.size / 1048576) + ' MB — the limit is 8 MB.', 'error');
           return;
         }
+        setStatus('Preparing ' + file.name + '…', 'busy');
         readFileAsDataUrl(file).then(function (dataUrl) {
-          pending = { kind: 'upload', dataUrl: dataUrl, filename: file.name, previewUrl: dataUrl };
-          setPreview(dataUrl);
-          setStatus('Ready to upload ' + file.name + '. Click Save cover.', 'busy');
-          updateSaveState();
+          return downscale(dataUrl, file).then(function (opt) {
+            var finalUrl = opt ? opt.dataUrl : dataUrl;
+            pending = { kind: 'upload', dataUrl: finalUrl, filename: opt ? opt.filename : file.name, previewUrl: finalUrl };
+            setPreview(finalUrl);
+            var note = opt
+              ? 'Optimised ' + kb(file.size) + ' KB → ' + kb(finalUrl.length * 0.75) + ' KB. Click Save cover.'
+              : 'Ready to upload (' + kb(finalUrl.length * 0.75) + ' KB). Click Save cover.';
+            setStatus(note, 'busy');
+            updateSaveState();
+          });
         }).catch(function (err) { setStatus(err.message, 'error'); });
       }
 
