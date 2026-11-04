@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SimplyHow — Thumbnail Admin</title>
+  <title>SimplyHow — Cover image admin</title>
   <style>
     :root {
       --ink: #0f172a;
+      --ink-soft: #1e293b;
       --muted: #64748b;
       --line: #e2e8f0;
-      --bg: #f8fafc;
+      --bg: #f6f7fb;
       --paper: #ffffff;
       --brand: #4f46e5;
       --brand-dark: #4338ca;
-      --radius: 12px;
+      --brand-soft: #eef2ff;
+      --ok: #047857;
+      --ok-soft: #ecfdf5;
+      --bad: #b91c1c;
+      --bad-soft: #fef2f2;
+      --radius: 14px;
       --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     }
     * { box-sizing: border-box; }
@@ -22,357 +28,488 @@
       font-family: var(--font);
       background: var(--bg);
       color: var(--ink);
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 4rem;
+      line-height: 1.5;
     }
-    .wrap {
-      max-width: 780px;
-      margin: 0 auto;
+    .wrap { max-width: 1080px; margin: 0 auto; }
+    header.top { margin-bottom: 1.5rem; }
+    h1 { font-size: 1.7rem; margin: 0 0 0.25rem; letter-spacing: -0.01em; }
+    .sub { color: var(--muted); margin: 0; font-size: 0.95rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: start;
     }
-    h1 {
-      font-size: 1.75rem;
-      margin: 0 0 0.35rem;
-    }
-    .sub {
-      color: var(--muted);
-      margin: 0 0 1.5rem;
-      font-size: 0.98rem;
-    }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
     .card {
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
+      padding: 1.1rem;
     }
-    label {
-      display: block;
-      font-weight: 600;
-      font-size: 0.92rem;
-      margin-bottom: 0.4rem;
-    }
-    select, input[type="text"], textarea {
+    .card + .card { margin-top: 1.25rem; }
+    h2 { font-size: 0.95rem; margin: 0 0 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    label.field { display: block; font-weight: 600; font-size: 0.85rem; margin: 0 0 0.35rem; color: var(--ink-soft); }
+    input[type="text"], input[type="search"], select {
       width: 100%;
       font: inherit;
-      padding: 0.65rem 0.85rem;
+      padding: 0.55rem 0.75rem;
       border: 1.5px solid var(--line);
-      border-radius: 999px;
+      border-radius: 10px;
       background: var(--paper);
       color: var(--ink);
     }
-    textarea {
-      border-radius: var(--radius);
-      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.85rem;
-      min-height: 180px;
-      resize: vertical;
+    input[type="text"]:focus, input[type="search"]:focus, select:focus {
+      outline: 2px solid var(--brand-soft);
+      border-color: var(--brand);
     }
     button {
-      background: var(--brand);
-      color: #fff;
-      border: 0;
-      padding: 0.65rem 1.25rem;
-      border-radius: 999px;
       font: inherit;
       font-weight: 600;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.6rem 1rem;
       cursor: pointer;
+      background: var(--brand);
+      color: #fff;
     }
     button:hover { background: var(--brand-dark); }
-    button:disabled { opacity: 0.6; cursor: default; }
-    .actions {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
+    button.ghost { background: var(--brand-soft); color: var(--brand-dark); }
+    button.ghost:hover { background: #e0e7ff; }
+    button.danger { background: var(--bad-soft); color: var(--bad); }
+    button.danger:hover { background: #fee2e2; }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .row > * { flex: 1 1 auto; }
+    .meta { color: var(--muted); font-size: 0.85rem; }
+
+    /* category list */
+    .cat { margin-bottom: 0.9rem; }
+    .cat-title {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--brand-dark);
+      margin: 0 0 0.4rem;
     }
+    .cat-title .count {
+      background: var(--brand-soft); color: var(--brand-dark);
+      border-radius: 999px; padding: 0 0.45rem; font-size: 0.72rem;
+    }
+    .article {
+      display: flex; align-items: center; gap: 0.5rem;
+      width: 100%; text-align: left;
+      background: none; color: var(--ink-soft);
+      border: 1px solid transparent; border-radius: 9px;
+      padding: 0.45rem 0.55rem; font-weight: 500; font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .article:hover { background: var(--bg); }
+    .article.active { background: var(--brand-soft); border-color: #c7d2fe; color: var(--brand-dark); font-weight: 650; }
+    .article .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: #cbd5e1; }
+    .dot.has { background: #10b981; }
+
+    /* preview */
     .preview {
-      margin-top: 0.75rem;
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      aspect-ratio: 3 / 1;
+      margin-top: 0.85rem;
+      border: 1.5px dashed var(--line);
+      border-radius: 12px;
+      background: #fbfcff;
+      min-height: 200px;
       display: grid;
       place-items: center;
-      color: var(--muted);
-      font-size: 0.9rem;
+      overflow: hidden;
+      padding: 0.5rem;
     }
     .preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 340px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
       display: block;
+      border-radius: 8px;
     }
-    .hint {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 0.6rem;
-    }
-    #saveStatus.ok { color: #047857; }
-    #saveStatus.error { color: #b91c1c; }
-    code {
-      background: var(--bg);
-      padding: 0.1rem 0.3rem;
-      border-radius: 6px;
-      font-size: 0.9em;
-    }
+    .preview .empty { color: var(--muted); font-size: 0.9rem; text-align: center; padding: 1rem; }
+    .chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.35rem; }
     .chip {
-      display: inline-block;
-      background: #eef2ff;
-      color: var(--brand-dark);
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin: 0.2rem 0.2rem 0 0;
+      display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 700; background: var(--brand-soft); color: var(--brand-dark);
     }
-    .meta {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
+    .chip.ok { background: var(--ok-soft); color: var(--ok); }
+    .chip.none { background: var(--bad-soft); color: var(--bad); }
+    .status { font-size: 0.85rem; margin-top: 0.7rem; min-height: 1.2em; }
+    .status.ok { color: var(--ok); }
+    .status.error { color: var(--bad); }
+    .status.busy { color: var(--muted); }
+    .drop {
+      margin-top: 0.75rem; border: 2px dashed #cbd5e1; border-radius: 12px;
+      padding: 1.1rem; text-align: center; color: var(--muted); font-size: 0.88rem;
+      cursor: pointer; background: #fcfdff;
     }
+    .drop:hover, .drop.over { border-color: var(--brand); background: var(--brand-soft); color: var(--brand-dark); }
+    .divider { display: flex; align-items: center; gap: 0.6rem; color: var(--muted); font-size: 0.78rem; margin: 1rem 0 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    code { background: var(--bg); padding: 0.1rem 0.3rem; border-radius: 5px; font-size: 0.88em; }
+    .save-bar { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+    .save-bar .spacer { flex: 1; }
+    #listSearch { margin-bottom: 0.75rem; }
+    .total { font-size: 0.82rem; color: var(--muted); margin-top: 0.5rem; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Thumbnail admin</h1>
-    <p class="sub">Manage article cover images and persist them to this local server. This tool edits a static JSON catalog — it does not upload images anywhere.</p>
+    <header class="top">
+      <h1>Cover image admin</h1>
+      <p class="sub">Pick an article, upload an image or paste a link, then save. Saved covers go into <code>public/admin/thumbnails.json</code> and are baked into the pages by <code>node build.js</code>.</p>
+    </header>
 
-    <div class="card">
-      <label for="articleSelect">Article</label>
-      <select id="articleSelect">
-        <option value="">Loading articles…</option>
-      </select>
-      <div class="meta" id="articleMeta">Select an article to see its current cover image.</div>
-    </div>
-
-    <div class="card">
-      <label for="coverInput">Cover image URL</label>
-      <input type="text" id="coverInput" placeholder="https://images.unsplash.com/…" autocomplete="off">
-      <div class="preview" id="preview">
-        <span>No preview</span>
+    <div class="grid">
+      <div>
+        <div class="card">
+          <h2>Articles by category</h2>
+          <input type="search" id="listSearch" placeholder="Filter articles…" autocomplete="off">
+          <div id="articleList"><p class="meta">Loading articles…</p></div>
+          <p class="total" id="totalLine"></p>
+        </div>
       </div>
-      <div class="hint">Paste an image URL (Unsplash works well). Leave blank to remove the cover for the selected article.</div>
-    </div>
 
-    <div class="card">
-      <label>Catalog output</label>
-      <p class="hint">This shows the catalog that will be saved. Use <strong>Save to server</strong> to persist it to this local preview server. The next rebuild (<code>node build.js</code>) bakes those covers into the article pages.</p>
-      <textarea id="catalogOutput" placeholder="Loading catalog…"></textarea>
-      <div class="actions">
-        <button id="copyBtn" type="button">Copy catalog JSON</button>
-        <button id="saveBtn" type="button">Save to server</button>
-        <button id="resetBtn" type="button">Reset to loaded file</button>
+      <div>
+        <div class="card">
+          <div id="editorEmpty">
+            <h2>No article selected</h2>
+            <p class="meta">Choose an article on the left to give it a cover image.</p>
+          </div>
+
+          <div id="editor" hidden>
+            <h2 id="editorTitle">Article</h2>
+            <div class="chips">
+              <span class="chip" id="editorCategory">Category</span>
+              <span class="chip none" id="editorCoverState">No cover</span>
+            </div>
+            <p class="meta" id="editorSlug"></p>
+
+            <div class="divider">Upload an image</div>
+            <div class="drop" id="dropZone">
+              <strong>Click to choose a file</strong><br>
+              or drag an image here — JPG, PNG, WebP, GIF or SVG up to 8 MB
+            </div>
+            <input type="file" id="fileInput" accept="image/*" hidden>
+
+            <div class="divider">or link to an image</div>
+            <label class="field" for="linkInput">Image URL</label>
+            <div class="row">
+              <input type="text" id="linkInput" placeholder="https://images.unsplash.com/…" autocomplete="off" style="flex:3 1 260px">
+              <button class="ghost" id="linkBtn" type="button" style="flex:0 0 auto">Use link</button>
+            </div>
+
+            <div class="preview" id="preview">
+              <span class="empty">No image yet — upload a file or paste a link to preview it here.</span>
+            </div>
+
+            <div class="save-bar">
+              <button id="saveBtn" type="button" disabled>Save cover</button>
+              <button class="danger" id="removeBtn" type="button">Remove cover</button>
+              <span class="spacer"></span>
+              <span class="meta" id="pendingHint"></span>
+            </div>
+            <div class="status" id="status"></div>
+          </div>
+        </div>
       </div>
-      <div id="saveStatus" class="hint"></div>
-    </div>
-
-    <div class="card">
-      <strong>How to use</strong>
-      <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
-        <li>Pick an article from the dropdown.</li>
-        <li>Paste its cover image URL.</li>
-        <li>Click <strong>Save to server</strong>. The catalog at <code>/admin/thumbnails.json</code> is updated immediately.</li>
-        <li>Run <code>node build.js</code> to bake the new covers into the article pages.</li>
-        <li>Existing <code>coverImage</code> values already in an article file take priority over the catalog.</li>
-      </ul>
     </div>
   </div>
 
   <script>
     (function () {
-      const select = document.getElementById('articleSelect');
-      const coverInput = document.getElementById('coverInput');
-      const preview = document.getElementById('preview');
-      const meta = document.getElementById('articleMeta');
-      const catalogOutput = document.getElementById('catalogOutput');
-      const copyBtn = document.getElementById('copyBtn');
-      const resetBtn = document.getElementById('resetBtn');
-      const saveBtn = document.getElementById('saveBtn');
-      const saveStatus = document.getElementById('saveStatus');
+      var listEl = document.getElementById('articleList');
+      var totalEl = document.getElementById('totalLine');
+      var filterEl = document.getElementById('listSearch');
+      var editorEmpty = document.getElementById('editorEmpty');
+      var editor = document.getElementById('editor');
+      var titleEl = document.getElementById('editorTitle');
+      var categoryEl = document.getElementById('editorCategory');
+      var coverStateEl = document.getElementById('editorCoverState');
+      var slugEl = document.getElementById('editorSlug');
+      var previewEl = document.getElementById('preview');
+      var linkInput = document.getElementById('linkInput');
+      var linkBtn = document.getElementById('linkBtn');
+      var fileInput = document.getElementById('fileInput');
+      var dropZone = document.getElementById('dropZone');
+      var saveBtn = document.getElementById('saveBtn');
+      var removeBtn = document.getElementById('removeBtn');
+      var statusEl = document.getElementById('status');
+      var pendingHint = document.getElementById('pendingHint');
 
-      let articles = [];
-      let catalog = {};
-      let base = '';
+      var articles = [];
+      var catalog = {};
+      var selected = null;
+      var pending = null; // { kind: 'upload'|'link', previewUrl, dataUrl, filename, url }
 
-      async function load() {
-        try {
-          base = (location.origin + location.pathname.replace(/\/admin\/?$/, '') || location.origin);
-          const articlesRes = await fetch(base + '/search-index.json');
-          const catalogRes = await fetch(base + '/admin/thumbnails.json');
-          if (!articlesRes.ok || !catalogRes.ok) throw new Error('Failed to load data files');
-          const index = await articlesRes.json();
-          const catalogJson = await catalogRes.json();
-          catalog = (catalogJson && Array.isArray(catalogJson.rows))
-            ? Object.fromEntries(catalogJson.rows.map(function (r) { return [r.slug, r.coverImage || '']; }))
-            : {};
-          articles = (index || [])
-            .map(function (item) {
-              return {
-                title: item.t,
-                slug: item.u.replace(/\/posts\/|\/$/g, ''),
-                category: item.c,
-                currentCover: catalog[item.slug] || ''
-              };
-            })
-            .sort(function (a, b) { return a.title.localeCompare(b.title); });
-          renderSelect();
-          renderCatalogOutput();
-          updateFromSelection();
-        } catch (err) {
-          select.innerHTML = '<option>Articles not available (run the site locally)</option>';
-          catalogOutput.value = JSON.stringify({ error: 'Could not load search-index.json or thumbnails.json. Run this page at http://localhost:4173/admin/ first.', columns: ['slug','coverImage'], rows: [] }, null, 2);
-          console.error(err);
-        }
+      function setStatus(text, kind) {
+        statusEl.textContent = text || '';
+        statusEl.className = 'status' + (kind ? ' ' + kind : '');
       }
 
-      function renderSelect() {
-        let html = '<option value="">Select an article…</option>';
-        articles.forEach(function (a) {
-          html += '<option value="' + a.slug + '">' +
-            a.title + ' <span class="chip">' + a.slug + '</span>' +
-            (a.currentCover ? ' <span class="chip" style="background:#ecfdf5;color:#047857">has cover</span>' : ' <span class="chip" style="background:#fef2f2;color:#b91c1c">no cover</span>') +
-            '</option>';
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
         });
-        select.innerHTML = html;
       }
 
-      function renderCatalogOutput() {
-        const out = { columns: ['slug', 'coverImage'], rows: [] };
-        Object.keys(catalog).sort().forEach(function (slug) {
-          out.rows.push({ slug: slug, coverImage: catalog[slug] });
-        });
-        catalogOutput.value = JSON.stringify(out, null, 2);
-      }
-
-      function updateFromSelection() {
-        const slug = select.value;
-        if (!slug) {
-          coverInput.value = '';
-          preview.innerHTML = '<span>No preview</span>';
-          meta.textContent = 'Select an article to see its current cover image.';
-          return;
-        }
-        const article = articles.find(function (a) { return a.slug === slug; });
-        if (!article) return;
-        const current = (catalog[slug] || '').trim();
-        coverInput.value = current;
-        meta.textContent = current ? 'Current cover image is set.' : 'No cover image set in the catalog.';
-        updatePreview(current);
-      }
-
-      function updatePreview(url) {
-        const val = (url || '').trim();
-        if (!val) {
-          preview.innerHTML = '<span>No preview</span>';
-          return;
-        }
-        preview.innerHTML = '<img src="' + val + '" alt="cover preview" onerror="this.parentElement.innerHTML=\'<span>Preview failed to load</span>\'">';
-      }
-
-      function buildCatalogFromForm() {
-        const slug = select.value;
-        if (!slug) return null;
-        const value = coverInput.value.trim();
-        const next = {};
-        Object.keys(catalog).forEach(function (key) {
-          if (key === slug) {
-            if (value) next[slug] = value;
-          } else {
-            next[key] = catalog[key];
-          }
-        });
-        if (value && !catalog[slug]) next[slug] = value;
-        if (!value && catalog[slug]) delete next[slug];
-        const out = { columns: ['slug', 'coverImage'], rows: [] };
-        Object.keys(next).sort().forEach(function (key) {
-          out.rows.push({ slug: key, coverImage: next[key] });
-        });
-        return out;
-      }
-
-      function refreshCatalogOutputFromForm() {
-        const out = buildCatalogFromForm();
-        if (!out) return;
-        catalogOutput.value = JSON.stringify(out, null, 2);
-      }
-
-      async function setStatus(text, kind) {
-        saveStatus.textContent = text;
-        saveStatus.className = 'hint' + (kind ? ' ' + kind : '');
-      }
-
-      async function saveToServer() {
-        const out = buildCatalogFromForm();
-        if (!out) {
-          setStatus('Select an article first.', 'error');
-          return;
-        }
-        saveBtn.disabled = true;
-        saveBtn.textContent = 'Saving…';
-        try {
-          const res = await fetch(base + '/admin/thumbnails.json', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(out)
+      function fetchJson(url, options) {
+        return fetch(url, options).then(function (res) {
+          return res.text().then(function (text) {
+            var data = null;
+            try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; }
+            if (!res.ok) {
+              var msg = (data && data.error) || res.status + ' ' + res.statusText;
+              throw new Error(msg);
+            }
+            return data;
           });
-          if (!res.ok) {
-            const errBody = await res.text().catch(function () { return ''; });
-            setStatus('Save failed: ' + (res.status ? res.status + ' ' : '') + (errBody || 'unknown error'), 'error');
-            return;
-          }
-          const saved = await res.json();
-          if (!saved || !Array.isArray(saved.rows)) throw new Error('Unexpected response');
-          catalog = Object.fromEntries(saved.rows.map(function (r) { return [r.slug, r.coverImage || '']; }));
-          renderCatalogOutput();
-          updateFromSelection();
-          setStatus('Saved to server. Rebuild the site to update article pages and previews.', 'ok');
-        } catch (err) {
-          setStatus('Save failed: ' + (err && err.message ? err.message : 'network error'), 'error');
-        } finally {
-          saveBtn.disabled = false;
-          saveBtn.textContent = 'Save to server';
-        }
+        });
       }
 
-      function fallBackCopy(text) {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy catalog JSON'; }, 1500); } catch (e) {}
-        document.body.removeChild(ta);
+      function load() {
+        return Promise.all([
+          fetchJson('/search-index.json').catch(function () { return []; }),
+          fetchJson('/admin/thumbnails.json').catch(function () { return { rows: [] }; })
+        ]).then(function (results) {
+          var index = results[0] || [];
+          var cat = results[1] || { rows: [] };
+          catalog = {};
+          (cat.rows || []).forEach(function (row) {
+            if (row && row.slug) catalog[row.slug] = row.coverImage || '';
+          });
+          articles = (index || []).map(function (item) {
+            var url = item.u || '';
+            return {
+              title: item.t || url,
+              url: url,
+              slug: url.replace(/^\/posts\//, '').replace(/\/$/, ''),
+              category: item.c || 'Uncategorised'
+            };
+          }).sort(function (a, b) {
+            if (a.category === b.category) return a.title.localeCompare(b.title);
+            return a.category.localeCompare(b.category);
+          });
+          renderList();
+        }).catch(function (err) {
+          listEl.innerHTML = '<p class="meta">Could not load articles. Is <code>admin-server.js</code> running?</p>';
+          setStatus('Load failed: ' + (err && err.message ? err.message : err), 'error');
+        });
       }
 
-      copyBtn.addEventListener('click', function () {
-        const text = catalogOutput.value;
-        if (!text) return;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(function () {
-            copyBtn.textContent = 'Copied';
-            setTimeout(function () { copyBtn.textContent = 'Copy catalog JSON'; }, 1500);
-          }).catch(function () { fallBackCopy(text); });
-        } else {
-          fallBackCopy(text);
+      function renderList() {
+        var q = (filterEl.value || '').trim().toLowerCase();
+        var groups = {};
+        var order = [];
+        articles.forEach(function (a) {
+          if (q && (a.title.toLowerCase().indexOf(q) === -1 && a.category.toLowerCase().indexOf(q) === -1)) return;
+          if (!groups[a.category]) { groups[a.category] = []; order.push(a.category); }
+          groups[a.category].push(a);
+        });
+        if (!order.length) {
+          listEl.innerHTML = '<p class="meta">No article matches that filter.</p>';
+          totalEl.textContent = '';
+          return;
         }
-      });
+        var covered = articles.filter(function (a) { return catalog[a.slug]; }).length;
+        var html = '';
+        order.forEach(function (name) {
+          html += '<div class="cat">';
+          html += '<p class="cat-title">' + escapeHtml(name) + ' <span class="count">' + groups[name].length + '</span></p>';
+          groups[name].forEach(function (a) {
+            var has = !!catalog[a.slug];
+            html += '<button type="button" class="article' + (selected === a.slug ? ' active' : '') + '" data-slug="' + escapeHtml(a.slug) + '">' +
+              '<span class="dot' + (has ? ' has' : '') + '" title="' + (has ? 'has a cover' : 'no cover') + '"></span>' +
+              '<span class="name">' + escapeHtml(a.title) + '</span></button>';
+          });
+          html += '</div>';
+        });
+        listEl.innerHTML = html;
+        totalEl.textContent = covered + ' of ' + articles.length + ' articles have a cover image.';
+      }
 
-      saveBtn.addEventListener('click', saveToServer);
+      function currentArticle() {
+        for (var i = 0; i < articles.length; i++) if (articles[i].slug === selected) return articles[i];
+        return null;
+      }
 
-      resetBtn.addEventListener('click', function () {
-        coverInput.value = '';
-        preview.innerHTML = '<span>No preview</span>';
-        renderCatalogOutput();
-        if (select.value) updateFromSelection();
+      function setPreview(src) {
+        if (!src) {
+          previewEl.innerHTML = '<span class="empty">No image yet — upload a file or paste a link to preview it here.</span>';
+          return;
+        }
+        previewEl.innerHTML = '<img alt="cover preview" src="' + escapeHtml(src) + '">';
+        var img = previewEl.querySelector('img');
+        img.addEventListener('error', function () {
+          previewEl.innerHTML = '<span class="empty">That image could not be loaded. Check the link or try another file.</span>';
+        });
+      }
+
+      function updateSaveState() {
+        saveBtn.disabled = !pending;
+        if (!pending) { pendingHint.textContent = ''; return; }
+        pendingHint.textContent = pending.kind === 'upload' ? 'New file ready to save' : 'New link ready to save';
+      }
+
+      function selectArticle(slug) {
+        selected = slug;
+        pending = null;
+        var a = currentArticle();
+        if (!a) {
+          editor.hidden = true;
+          editorEmpty.hidden = false;
+          return;
+        }
+        editorEmpty.hidden = true;
+        editor.hidden = false;
+        titleEl.textContent = a.title;
+        categoryEl.textContent = a.category;
+        slugEl.innerHTML = 'Slug: <code>' + escapeHtml(a.slug) + '</code>';
+        var existing = (catalog[a.slug] || '').trim();
+        coverStateEl.textContent = existing ? 'Has cover' : 'No cover';
+        coverStateEl.className = 'chip ' + (existing ? 'ok' : 'none');
+        linkInput.value = existing.indexOf('/uploads/') === 0 ? '' : existing;
+        setPreview(existing);
         setStatus('', '');
+        updateSaveState();
+        renderList();
+      }
+
+      function readFileAsDataUrl(file) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () { resolve(String(reader.result)); };
+          reader.onerror = function () { reject(new Error('could not read that file')); };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function handleFile(file) {
+        if (!file) return;
+        if (!/^image\//.test(file.type) && !/\.(jpe?g|png|webp|gif|svg)$/i.test(file.name)) {
+          setStatus('That file is not an image.', 'error');
+          return;
+        }
+        if (file.size > 8 * 1024 * 1024) {
+          setStatus('That image is ' + Math.round(file.size / 1048576) + ' MB — the limit is 8 MB.', 'error');
+          return;
+        }
+        readFileAsDataUrl(file).then(function (dataUrl) {
+          pending = { kind: 'upload', dataUrl: dataUrl, filename: file.name, previewUrl: dataUrl };
+          setPreview(dataUrl);
+          setStatus('Ready to upload ' + file.name + '. Click Save cover.', 'busy');
+          updateSaveState();
+        }).catch(function (err) { setStatus(err.message, 'error'); });
+      }
+
+      function save() {
+        if (!pending || !selected) return;
+        var article = currentArticle();
+        saveBtn.disabled = true;
+        setStatus('Saving…', 'busy');
+
+        var uploadStep = pending.kind === 'upload'
+          ? fetchJson('/admin/upload-image', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ slug: article.slug, filename: pending.filename, file: pending.dataUrl })
+            }).then(function (data) {
+              if (!data || !data.url) throw new Error('the server did not return an image URL');
+              return data.url;
+            })
+          : Promise.resolve(pending.url);
+
+        uploadStep.then(function (url) {
+          catalog[article.slug] = url;
+          return writeCatalog();
+        }).then(function () {
+          var kept = (catalog[article.slug] || '');
+          selected = null;
+          renderList();
+          selectArticle(article.slug);
+          setStatus('Saved. Run node build.js to publish this cover across the site.', 'ok');
+        }).catch(function (err) {
+          setStatus('Save failed: ' + (err && err.message ? err.message : err), 'error');
+        }).then(function () {
+          updateSaveState();
+        });
+      }
+
+      function writeCatalog() {
+        var rows = Object.keys(catalog).sort().map(function (slug) {
+          return { slug: slug, coverImage: catalog[slug] || '' };
+        }).filter(function (row) { return row.slug; });
+        return fetchJson('/admin/thumbnails.json', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ columns: ['slug', 'coverImage'], rows: rows })
+        }).then(function (saved) {
+          catalog = {};
+          (saved.rows || []).forEach(function (row) { if (row.slug) catalog[row.slug] = row.coverImage || ''; });
+        });
+      }
+
+      function removeCover() {
+        if (!selected) return;
+        var article = currentArticle();
+        if (!catalog[article.slug]) { setStatus('This article has no cover to remove.', 'error'); return; }
+        removeBtn.disabled = true;
+        setStatus('Removing…', 'busy');
+        delete catalog[article.slug];
+        writeCatalog().then(function () {
+          pending = null;
+          selectArticle(article.slug);
+          setStatus('Cover removed.', 'ok');
+        }).catch(function (err) {
+          setStatus('Could not remove: ' + (err && err.message ? err.message : err), 'error');
+        }).then(function () { removeBtn.disabled = false; });
+      }
+
+      listEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('.article');
+        if (!btn) return;
+        selectArticle(btn.getAttribute('data-slug'));
       });
 
-      select.addEventListener('change', updateFromSelection);
-      coverInput.addEventListener('input', function () {
-        updatePreview(coverInput.value);
-        refreshCatalogOutputFromForm();
+      filterEl.addEventListener('input', renderList);
+
+      dropZone.addEventListener('click', function () { fileInput.click(); });
+      dropZone.addEventListener('dragover', function (e) { e.preventDefault(); dropZone.classList.add('over'); });
+      dropZone.addEventListener('dragleave', function () { dropZone.classList.remove('over'); });
+      dropZone.addEventListener('drop', function (e) {
+        e.preventDefault();
+        dropZone.classList.remove('over');
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
       });
+      fileInput.addEventListener('change', function () {
+        if (fileInput.files && fileInput.files[0]) handleFile(fileInput.files[0]);
+        fileInput.value = '';
+      });
+
+      linkBtn.addEventListener('click', function () {
+        var value = (linkInput.value || '').trim();
+        if (!value) { setStatus('Paste an image URL first.', 'error'); return; }
+        if (!/^(https?:\/\/|\/)/i.test(value)) { setStatus('Use a full URL starting with http:// or https://.', 'error'); return; }
+        pending = { kind: 'link', url: value };
+        setPreview(value);
+        setStatus('Link ready to save.', 'busy');
+        updateSaveState();
+      });
+
+      linkInput.addEventListener('input', function () {
+        var value = (linkInput.value || '').trim();
+        if (pending && pending.kind === 'link') pending = null;
+        updateSaveState();
+        if (value) setPreview(value);
+      });
+
+      saveBtn.addEventListener('click', save);
+      removeBtn.addEventListener('click', removeCover);
 
       load();
     })();

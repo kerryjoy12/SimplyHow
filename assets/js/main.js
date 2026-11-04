@@ -58,15 +58,36 @@
       var s = score(index[i], q);
       if (s > 0) matches.push({ item: index[i], s: s });
     }
-    matches.sort(function (a, b) { return b.s - a.s; });
-    matches = matches.slice(0, 12);
+    matches.sort(function (a, b) {
+      if (b.s !== a.s) return b.s - a.s;
+      return (a.item.c || '').localeCompare(b.item.c || '');
+    });
+    matches = matches.slice(0, 16);
     if (!matches.length) {
       results.innerHTML = '<p class="search-empty">No guides match "' + q.replace(/</g, '&lt;') + '". Try a simpler phrase.</p>';
       return;
     }
-    results.innerHTML = matches
-      .map(function (m) {
-        return '<a class="search-result" href="' + m.item.u + '"><strong>' + m.item.t + '</strong><span>' + m.item.c + ' &middot; ' + m.item.d + '</span></a>';
+
+    // Group hits under their category so it is obvious which topic each
+    // guide belongs to while scanning the results.
+    var order = [];
+    var groups = {};
+    matches.forEach(function (m) {
+      var cat = m.item.c || 'Guides';
+      if (!groups[cat]) { groups[cat] = []; order.push(cat); }
+      groups[cat].push(m.item);
+    });
+
+    results.innerHTML = order
+      .map(function (cat) {
+        var items = groups[cat];
+        var rows = items
+          .map(function (item) {
+            return '<a class="search-result" href="' + item.u + '"><strong>' + item.t + '</strong><span>' + item.d + '</span></a>';
+          })
+          .join('');
+        return '<section class="search-group"><h3 class="search-group-title">' + cat +
+          '<span class="search-group-count">' + items.length + '</span></h3>' + rows + '</section>';
       })
       .join('');
   }
