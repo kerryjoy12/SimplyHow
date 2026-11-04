@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SimplyHow — Thumbnail Admin</title>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --bg: #f8fafc;
+      --paper: #ffffff;
+      --brand: #4f46e5;
+      --brand-dark: #4338ca;
+      --radius: 12px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--ink);
+      padding: 2rem 1rem;
+    }
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin: 0 0 0.35rem;
+    }
+    .sub {
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      font-size: 0.98rem;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 0.4rem;
+    }
+    select, input[type="text"], textarea {
+      width: 100%;
+      font: inherit;
+      padding: 0.65rem 0.85rem;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    textarea {
+      border-radius: var(--radius);
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      min-height: 180px;
+      resize: vertical;
+    }
+    button {
+      background: var(--brand);
+      color: #fff;
+      border: 0;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: var(--brand-dark); }
+    button:disabled { opacity: 0.6; cursor: default; }
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .preview {
+      margin-top: 0.75rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      aspect-ratio: 3 / 1;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 0.6rem;
+    }
+    #saveStatus.ok { color: #047857; }
+    #saveStatus.error { color: #b91c1c; }
+    code {
+      background: var(--bg);
+      padding: 0.1rem 0.3rem;
+      border-radius: 6px;
+      font-size: 0.9em;
+    }
+    .chip {
+      display: inline-block;
+      background: #eef2ff;
+      color: var(--brand-dark);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin: 0.2rem 0.2rem 0 0;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Thumbnail admin</h1>
+    <p class="sub">Manage article cover images and persist them to this local server. This tool edits a static JSON catalog — it does not upload images anywhere.</p>
+
+    <div class="card">
+      <label for="articleSelect">Article</label>
+      <select id="articleSelect">
+        <option value="">Loading articles…</option>
+      </select>
+      <div class="meta" id="articleMeta">Select an article to see its current cover image.</div>
+    </div>
+
+    <div class="card">
+      <label for="coverInput">Cover image URL</label>
+      <input type="text" id="coverInput" placeholder="https://images.unsplash.com/…" autocomplete="off">
+      <div class="preview" id="preview">
+        <span>No preview</span>
+      </div>
+      <div class="hint">Paste an image URL (Unsplash works well). Leave blank to remove the cover for the selected article.</div>
+    </div>
+
+    <div class="card">
+      <label>Catalog output</label>
+      <p class="hint">This shows the catalog that will be saved. Use <strong>Save to server</strong> to persist it to this local preview server. The next rebuild (<code>node build.js</code>) bakes those covers into the article pages.</p>
+      <textarea id="catalogOutput" placeholder="Loading catalog…"></textarea>
+      <div class="actions">
+        <button id="copyBtn" type="button">Copy catalog JSON</button>
+        <button id="saveBtn" type="button">Save to server</button>
+        <button id="resetBtn" type="button">Reset to loaded file</button>
+      </div>
+      <div id="saveStatus" class="hint"></div>
+    </div>
+
+    <div class="card">
+      <strong>How to use</strong>
+      <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
+        <li>Pick an article from the dropdown.</li>
+        <li>Paste its cover image URL.</li>
+        <li>Click <strong>Save to server</strong>. The catalog at <code>/admin/thumbnails.json</code> is updated immediately.</li>
+        <li>Run <code>node build.js</code> to bake the new covers into the article pages.</li>
+        <li>Existing <code>coverImage</code> values already in an article file take priority over the catalog.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const select = document.getElementById('articleSelect');
+      const coverInput = document.getElementById('coverInput');
+      const preview = document.getElementById('preview');
+      const meta = document.getElementById('articleMeta');
+      const catalogOutput = document.getElementById('catalogOutput');
+      const copyBtn = document.getElementById('copyBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const saveBtn = document.getElementById('saveBtn');
+      const saveStatus = document.getElementById('saveStatus');
+
+      let articles = [];
+      let catalog = {};
+      let base = '';
+
+      async function load() {
+        try {
+          base = (location.origin + location.pathname.replace(/\/admin\/?$/, '') || location.origin);
+          const articlesRes = await fetch(base + '/search-index.json');
+          const catalogRes = await fetch(base + '/admin/thumbnails.json');
+          if (!articlesRes.ok || !catalogRes.ok) throw new Error('Failed to load data files');
+          const index = await articlesRes.json();
+          const catalogJson = await catalogRes.json();
+          catalog = (catalogJson && Array.isArray(catalogJson.rows))
+            ? Object.fromEntries(catalogJson.rows.map(function (r) { return [r.slug, r.coverImage || '']; }))
+            : {};
+          articles = (index || [])
+            .map(function (item) {
+              return {
+                title: item.t,
+                slug: item.u.replace(/\/posts\/|\/$/g, ''),
+                category: item.c,
+                currentCover: catalog[item.slug] || ''
+              };
+            })
+            .sort(function (a, b) { return a.title.localeCompare(b.title); });
+          renderSelect();
+          renderCatalogOutput();
+          updateFromSelection();
+        } catch (err) {
+          select.innerHTML = '<option>Articles not available (run the site locally)</option>';
+          catalogOutput.value = JSON.stringify({ error: 'Could not load search-index.json or thumbnails.json. Run this page at http://localhost:4173/admin/ first.', columns: ['slug','coverImage'], rows: [] }, null, 2);
+          console.error(err);
+        }
+      }
+
+      function renderSelect() {
+        let html = '<option value="">Select an article…</option>';
+        articles.forEach(function (a) {
+          html += '<option value="' + a.slug + '">' +
+            a.title + ' <span class="chip">' + a.slug + '</span>' +
+            (a.currentCover ? ' <span class="chip" style="background:#ecfdf5;color:#047857">has cover</span>' : ' <span class="chip" style="background:#fef2f2;color:#b91c1c">no cover</span>') +
+            '</option>';
+        });
+        select.innerHTML = html;
+      }
+
+      function renderCatalogOutput() {
+        const out = { columns: ['slug', 'coverImage'], rows: [] };
+        Object.keys(catalog).sort().forEach(function (slug) {
+          out.rows.push({ slug: slug, coverImage: catalog[slug] });
+        });
+        catalogOutput.value = JSON.stringify(out, null, 2);
+      }
+
+      function updateFromSelection() {
+        const slug = select.value;
+        if (!slug) {
+          coverInput.value = '';
+          preview.innerHTML = '<span>No preview</span>';
+          meta.textContent = 'Select an article to see its current cover image.';
+          return;
+        }
+        const article = articles.find(function (a) { return a.slug === slug; });
+        if (!article) return;
+        const current = (catalog[slug] || '').trim();
+        coverInput.value = current;
+        meta.textContent = current ? 'Current cover image is set.' : 'No cover image set in the catalog.';
+        updatePreview(current);
+      }
+
+      function updatePreview(url) {
+        const val = (url || '').trim();
+        if (!val) {
+          preview.innerHTML = '<span>No preview</span>';
+          return;
+        }
+        preview.innerHTML = '<img src="' + val + '" alt="cover preview" onerror="this.parentElement.innerHTML=\'<span>Preview failed to load</span>\'">';
+      }
+
+      function buildCatalogFromForm() {
+        const slug = select.value;
+        if (!slug) return null;
+        const value = coverInput.value.trim();
+        const next = {};
+        Object.keys(catalog).forEach(function (key) {
+          if (key === slug) {
+            if (value) next[slug] = value;
+          } else {
+            next[key] = catalog[key];
+          }
+        });
+        if (value && !catalog[slug]) next[slug] = value;
+        if (!value && catalog[slug]) delete next[slug];
+        const out = { columns: ['slug', 'coverImage'], rows: [] };
+        Object.keys(next).sort().forEach(function (key) {
+          out.rows.push({ slug: key, coverImage: next[key] });
+        });
+        return out;
+      }
+
+      function refreshCatalogOutputFromForm() {
+        const out = buildCatalogFromForm();
+        if (!out) return;
+        catalogOutput.value = JSON.stringify(out, null, 2);
+      }
+
+      async function setStatus(text, kind) {
+        saveStatus.textContent = text;
+        saveStatus.className = 'hint' + (kind ? ' ' + kind : '');
+      }
+
+      async function saveToServer() {
+        const out = buildCatalogFromForm();
+        if (!out) {
+          setStatus('Select an article first.', 'error');
+          return;
+        }
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving…';
+        try {
+          const res = await fetch(base + '/admin/thumbnails.json', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(out)
+          });
+          if (!res.ok) {
+            const errBody = await res.text().catch(function () { return ''; });
+            setStatus('Save failed: ' + (res.status ? res.status + ' ' : '') + (errBody || 'unknown error'), 'error');
+            return;
+          }
+          const saved = await res.json();
+          if (!saved || !Array.isArray(saved.rows)) throw new Error('Unexpected response');
+          catalog = Object.fromEntries(saved.rows.map(function (r) { return [r.slug, r.coverImage || '']; }));
+          renderCatalogOutput();
+          updateFromSelection();
+          setStatus('Saved to server. Rebuild the site to update article pages and previews.', 'ok');
+        } catch (err) {
+          setStatus('Save failed: ' + (err && err.message ? err.message : 'network error'), 'error');
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save to server';
+        }
+      }
+
+      function fallBackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy catalog JSON'; }, 1500); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+
+      copyBtn.addEventListener('click', function () {
+        const text = catalogOutput.value;
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            copyBtn.textContent = 'Copied';
+            setTimeout(function () { copyBtn.textContent = 'Copy catalog JSON'; }, 1500);
+          }).catch(function () { fallBackCopy(text); });
+        } else {
+          fallBackCopy(text);
+        }
+      });
+
+      saveBtn.addEventListener('click', saveToServer);
+
+      resetBtn.addEventListener('click', function () {
+        coverInput.value = '';
+        preview.innerHTML = '<span>No preview</span>';
+        renderCatalogOutput();
+        if (select.value) updateFromSelection();
+        setStatus('', '');
+      });
+
+      select.addEventListener('change', updateFromSelection);
+      coverInput.addEventListener('input', function () {
+        updatePreview(coverInput.value);
+        refreshCatalogOutputFromForm();
+      });
+
+      load();
+    })();
+  </script>
+</body>
+</html>
