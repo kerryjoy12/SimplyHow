@@ -411,13 +411,14 @@ p { margin: 0 0 1.15rem; }
   margin-inline: auto;
   border-radius: var(--radius);
 }
-/* On article pages the box hugs the photo instead of the photo being padded
-   into a wide banner: the picture fills the box edge to edge and keeps every
-   pixel the source has, with no upscaling and no empty blurred gutter. */
+/* On article pages the cover box is sized by the photo, with a floor so a small
+   source still reads as a cover (and never sits in an empty blurred band).
+   Larger uploads grow with the box up to the usual 900px banner width. */
 .post-cover-wrap--photo {
   position: relative;
   display: block;
   width: fit-content;
+  min-width: min(100%, 360px);
   max-width: min(900px, 100%);
   min-height: 0;
   padding: 0;
@@ -426,7 +427,9 @@ p { margin: 0 0 1.15rem; }
 .post-cover-wrap--photo .post-cover {
   position: relative;
   z-index: 1;
+  width: 100%;
   max-height: clamp(180px, 46vw, 460px);
+  object-fit: contain;
   border-radius: var(--radius);
 }
 .post-header { max-width: 780px; padding-top: 1.75rem; }
