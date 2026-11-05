@@ -411,32 +411,23 @@ p { margin: 0 0 1.15rem; }
   margin-inline: auto;
   border-radius: var(--radius);
 }
-/* Same treatment on article pages: a tall blurred banner, photo on top at its
-   natural size so no pixels are invented. */
+/* On article pages the box hugs the photo instead of the photo being padded
+   into a wide banner: the picture fills the box edge to edge and keeps every
+   pixel the source has, with no upscaling and no empty blurred gutter. */
 .post-cover-wrap--photo {
   position: relative;
-  display: grid;
-  place-items: center;
-  min-height: clamp(140px, 22vw, 220px);
-  padding: clamp(1rem, 3vw, 2rem);
+  display: block;
+  width: fit-content;
+  max-width: min(900px, 100%);
+  min-height: 0;
+  padding: 0;
   background: #e9e7e2;
-}
-.post-cover-wrap--photo::before {
-  content: "";
-  position: absolute;
-  inset: -15%;
-  background-image: var(--cover-image);
-  background-size: cover;
-  background-position: center;
-  filter: blur(28px) saturate(1.1) brightness(0.75);
-  transform: scale(1.15);
 }
 .post-cover-wrap--photo .post-cover {
   position: relative;
   z-index: 1;
-  max-height: 100%;
-  border-radius: 6px;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  max-height: clamp(180px, 46vw, 460px);
+  border-radius: var(--radius);
 }
 .post-header { max-width: 780px; padding-top: 1.75rem; }
 .post-header h1 { margin-top: 0.6rem; }
