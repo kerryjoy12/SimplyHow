@@ -1,16 +1,16 @@
 // Central site configuration.
-// IMPORTANT: replace `url` with your real domain before deploying
+// IMPORTANT: set `url` to your real domain before deploying
 // (canonical URLs, sitemap and RSS all derive from it).
 module.exports = {
   siteName: 'SimplyHow',
   tagline: 'Practical Guides for Everyday Life',
   description:
     'SimplyHow publishes 80+ step-by-step how-to guides on technology, home & garden, cooking, DIY crafts and productivity. Clear instructions, real troubleshooting, no fluff.',
-  url: 'https://www.simplyhow.example', // TODO: replace with your real domain (no trailing slash)
+  url: 'https://simplyhow.buzz',
   language: 'en',
   author: {
     name: 'The SimplyHow Editorial Team',
-    jobTitle: 'Senior Editors & Practitioners',
+    jobTitle: 'Publisher',
     sameAs: []
   },
   // TODO: paste your AdSense publisher ID (ca-pub-xxxxxxxxxxxxxxxx) to enable ad slots.

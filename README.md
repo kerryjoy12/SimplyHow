@@ -1,8 +1,8 @@
-# SimplyHow - AdSense-ready how-to blog (80 articles)
+# SimplyHow - how-to guides website
 
-A complete, zero-dependency static blog: 80 original how-to guides (2000+ words each),
-five category hubs, full policy page set, SEO metadata + JSON-LD schema, sitemap, RSS,
-site search and cookie consent - everything Google AdSense reviewers check for.
+A zero-dependency static site with how-to guides, category hubs, policy pages, SEO
+metadata, JSON-LD, a sitemap, RSS, and site search. Passing project checks does not
+guarantee AdSense approval; Google reviews the deployed site and its content.
 
 ## Commands
 
@@ -48,21 +48,17 @@ npm run all
 
 ## Go-live checklist (AdSense)
 
-1. **Buy a custom domain** and serve the site over **HTTPS** (all major hosts do this automatically).
-2. Edit `site.config.js`: set `url` to your real domain (no trailing slash) and rebuild.
-3. Write a real author identity in `site.config.js` (`author.name`, `author.jobTitle`) - AdSense favors clear E-E-A-T ownership.
-4. Verify the site in **Google Search Console** and submit `sitemap.xml`.
-5. **Apply to AdSense** (ads.txt is NOT added until approved - see next step).
-6. After approval: put your publisher ID in `site.config.js` → `adsenseClient: 'ca-pub-xxxxxxxxxxxxxxxx'`, rebuild. This enables the top-banner, in-article and below-content ad slots **and** generates a correct `ads.txt`.
-7. Add a 1200x630 social image and set `og:image` in `lib/template.js` if you want richer social shares.
-
-Pre-approval the site deliberately ships **without** ad code (the ad slots stay hidden),
-so reviewers only see clean, fast-loading content.
+1. Provide the real public domain, configure it in `site.config.js` (without a trailing slash), and deploy over HTTPS.
+2. Verify that domain in **Google Search Console** and submit the deployed sitemap.
+3. Use accurate publisher/author information and review articles for originality, accuracy, sources, safety, and real editorial practices. Do not claim testing or credentials that did not occur.
+4. Confirm the contact email works and all policies describe the services actually used.
+5. Apply to AdSense and complete Google's site-ownership verification.
+6. Ads are currently disabled. **Do not enable ads by only setting `adsenseClient`**: this project does not implement a consent management platform. Before serving ads, configure the appropriate Google-certified CMP and regional consent behavior, then verify the privacy disclosures and generated `ads.txt` against the publisher ID in your AdSense account.
 
 ## Already in place
 
 - Privacy Policy, Terms, Disclaimer, Cookie Policy, Editorial Policy, About, Contact - all linked from the footer and navigable from the header menu
-- Cookie consent banner (localStorage, GDPR-style accept/reject)
+- No analytics, ad code, cookies, or local-storage consent banner are currently enabled
 - Per-page title/description/canonical/OG/Twitter tags
 - JSON-LD: WebSite, Blog, BlogPosting, FAQPage, BreadcrumbList, CollectionPage, ItemList, ContactPage
 - `sitemap.xml`, `robots.txt` (points at the sitemap), `rss.xml`, `404.html`

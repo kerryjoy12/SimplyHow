@@ -1,7 +1,7 @@
 'use strict';
 
-/* SimplyHow client-side behaviour: mobile nav, search, cookie consent,
-   guide filtering, back-to-top. No dependencies. */
+/* SimplyHow client-side behaviour: mobile nav, search, guide filtering,
+   back-to-top. No dependencies. */
 (function () {
   var doc = document;
 
@@ -147,23 +147,6 @@
         filter.parentNode.insertBefore(note, filter.nextSibling);
       }
       note.textContent = q ? shown + ' of ' + cards.length + ' guides shown' : '';
-    });
-  }
-
-  /* -------------------------------------------------------- cookie consent */
-  var banner = doc.getElementById('cookie-banner');
-  var CONSENT_KEY = 'simplyhow_cookie_consent';
-  function getConsent() { try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function setConsent(v) { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* storage blocked */ } }
-  if (banner && !getConsent()) {
-    setTimeout(function () { banner.hidden = false; }, 900);
-  }
-  if (banner) {
-    banner.addEventListener('click', function (e) {
-      var action = e.target && e.target.getAttribute && e.target.getAttribute('data-cookie');
-      if (!action) return;
-      setConsent(action);
-      banner.hidden = true;
     });
   }
 

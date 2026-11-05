@@ -10,28 +10,22 @@ SimplyHow exists for one reason: to answer the question **"how do I do this?"** 
 
 Every guide on this site is written for a person with a real task in front of them - a laptop that has slowed to a crawl, a drain that will not clear, a loaf of bread that came out flat. We assume you are capable and busy, not that you need to be convinced.
 
-## Who writes SimplyHow
+## Who publishes SimplyHow
 
-We are a small team of editors, tinkerers and practitioners. Our writers work in or closely adjacent to the subjects they cover: technology guides are produced by people who set up and maintain real machines, home and garden guides by people who maintain their own properties, and cooking and craft guides by people who cook and make things every week.
+SimplyHow publishes these guides under the collective byline **The SimplyHow Editorial Team**. This is a publisher attribution, not a named individual author or a claim that every guide has been independently tested by a specialist.
 
-Every SimplyHow guide passes through the same three pairs of hands:
-
-1. **The writer** researches the topic using primary documentation, manufacturer instructions and hands-on testing, then drafts the guide.
-2. **A reviewing editor** works through the guide step-by-step on a clean setup to confirm it is complete, sequenced correctly and written in plain language.
-3. **A final check** verifies links, screenshots descriptions, product names, dates and any claims against sources before publication.
-
-If a step cannot be verified, it does not ship. If a tool has changed and we have not re-tested the guide, we update it or pull it.
+Our goal is to make each guide practical, clear, and specific about prerequisites and troubleshooting. Technical interfaces, products, and local rules change, so check current official instructions for your device or situation before acting. We welcome reports about errors and outdated steps through our [Contact page](/contact/).
 
 ## How we make money
 
-SimplyHow is free to read and always will be. We earn revenue through display advertising (once approved by Google AdSense) and, occasionally, affiliate links to products we mention. If you buy through an affiliate link, we may earn a commission at no extra cost to you.
+SimplyHow is currently free to read and does not display ads. We may earn a commission from affiliate links to products we mention; if you buy through one, it is at no extra cost to you. Any future advertising will be disclosed and described in our [Privacy Policy](/privacy-policy/).
 
 That model never buys an opinion. Our writers do not accept payment for coverage, we do not sell links, and we do not publish sponsored articles disguised as tutorials. Products are mentioned because the guide genuinely needs them, and we say plainly when a free or built-in tool does the job.
 
 ## What we will not do
 
 - We do not copy text from other sites, and we do not publish rewritten press releases as guides.
-- We do not publish guides we have not been able to check ourselves.
+- We do not claim a guide was hands-on tested unless that testing was actually performed.
 - We do not collect sensitive personal data or sell visitor data to anyone.
 - We do not give medical, legal or financial advice - our disclaimers explain where the line is.
 

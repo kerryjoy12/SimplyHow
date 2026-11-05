@@ -4,8 +4,6 @@ slug: terms
 description: The terms that govern your use of SimplyHow - acceptable use, intellectual property, liability limits and changes.
 ---
 
-**Last updated: [build date]**
-
 These Terms of Service ("Terms") govern your use of SimplyHow (the "Site"). By reading or using the Site you agree to them. If you do not agree, please do not use the Site.
 
 ## 1. About this Site
@@ -47,7 +45,7 @@ Our guides link to third-party websites we do not operate. We do not control the
 
 ## 6. Advertising and affiliate relationships
 
-The Site may display advertising through Google AdSense and may contain affiliate links. If you buy through an affiliate link we may earn a commission at no extra cost to you. Advertising does not influence our editorial decisions, and we do not publish paid articles disguised as guides. Further detail is in our [Editorial Policy](/editorial-policy/) and [Privacy Policy](/privacy-policy/).
+The Site does not currently serve third-party advertising. It may contain affiliate links; if you buy through one, we may earn a commission at no extra cost to you. Any future advertising will be disclosed and will not determine editorial content. Further detail is in our [Editorial Policy](/editorial-policy/) and [Privacy Policy](/privacy-policy/).
 
 ## 7. User communications
 

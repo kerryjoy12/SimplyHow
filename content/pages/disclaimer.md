@@ -4,8 +4,6 @@ slug: disclaimer
 description: What SimplyHow guides can and cannot promise - general information only, no professional advice, affiliate transparency.
 ---
 
-**Last updated: [build date]**
-
 ## General information only
 
 All content on SimplyHow is published for **general informational and educational purposes**. It reflects the research, testing and experience of our editors at the time of writing and updating, and nothing more.
@@ -38,7 +36,7 @@ Some links to tools, products or services are affiliate links. Where a link is a
 
 ## Advertising disclosure
 
-This site displays third-party advertising, including through Google AdSense. Advertisers do not influence our editorial content. Google may use cookies to serve ads based on your prior visits to this or other websites, as described in our [Privacy Policy](/privacy-policy/).
+This site does not currently display third-party advertising. If advertising is added, it will be disclosed and described in our [Privacy Policy](/privacy-policy/).
 
 ## External links and third-party content
 

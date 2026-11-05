@@ -12,9 +12,7 @@ If you cannot find what you need, we would genuinely like to hear from you.
 
 ## Email
 
-*Email:* [hello@simplyhow.example](mailto:hello@simplyhow.example)
-
-*(Replace this address in `content/pages/contact.md` with your real domain email before going live - a working inbox on your own domain is required for AdSense approval.)*
+*Email:* [makorig00@gmail.com](mailto:makorig00@gmail.com)
 
 To help us reply usefully, please include:
 

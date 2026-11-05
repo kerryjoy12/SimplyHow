@@ -1,12 +1,10 @@
 ---
 title: Cookie Policy
 slug: cookie-policy
-description: Exactly which cookies SimplyHow uses, why, how long they last, and how to control or disable them.
+description: What browser storage SimplyHow currently uses, and how third-party services may differ.
 ---
 
-**Last updated: [build date]**
-
-This Cookie Policy explains what cookies are, which ones SimplyHow uses, and how you stay in control. It should be read together with our [Privacy Policy](/privacy-policy/).
+This Cookie Policy explains the site's current use of cookies and browser storage. Read it with our [Privacy Policy](/privacy-policy/).
 
 ## What a cookie is
 
@@ -14,61 +12,27 @@ A cookie is a small text file a website asks your browser to store on your devic
 
 Related technologies - local storage, pixels and device identifiers - work similarly, and this policy covers them too.
 
-## Cookies we set
+## What this site uses
 
-### 1. Strictly necessary (always on)
+The current site code does not set cookies or read or write browser local storage. It does not currently load analytics or advertising services. The web host may process technical requests to deliver and protect the site; check the host's privacy documentation for its use of cookies and server logs. Some article images are hosted by third parties, whose servers receive a request when your browser loads an image.
 
-| Name | Purpose | Lifetime |
-| --- | --- | --- |
-| `simplyhow_cookie_consent` | Remembers whether you accepted or rejected optional cookies, so the consent banner does not reappear on every page. Stored via your browser's local storage. | Until you clear site data |
-
-This cookie is required for the site to behave as you asked it to. It does not track you and is never shared.
-
-### 2. Preference and analytics (optional, only with consent)
-
-| Purpose | What it measures | Typical lifetime |
-| --- | --- | --- |
-| Aggregate page statistics - which guides are read, how long stays last, where readers leave | Helps us improve steps that confuse people; recorded without building advertising profiles | Up to 2 years |
-
-If you reject optional cookies via the banner, no analytics or advertising cookies are stored by us.
-
-### 3. Advertising cookies (optional, only with consent)
-
-Once advertising is enabled on the site, advertising partners - principally **Google AdSense** - may store cookies to:
-
-- Serve ads and cap how often you see them
-- Measure whether an ad was viewed or clicked
-- Personalize ads based on your visits to this and other websites
-
-Google's use of the DoubleClick advertising cookie means it and its partners can serve ads to you based on your visit to this site and/or other sites on the Internet. You can:
-
-- Manage or opt out of personalized ads at **[Google Ads Settings](https://www.google.com/settings/ads)**
-- Opt out of third-party vendors' cookies at **[optout.aboutads.info](https://optout.aboutads.info/)**
-- Review Google's advertising policies at <https://policies.google.com/technologies/ads>
-
-Advertising cookies are only set after you click **Accept** on our consent banner. If you choose **Reject**, we do not store them and you will see non-personalized advertising only (or none, if the network requires consent it cannot obtain).
+If analytics or advertising services are enabled later, this policy will be updated before they are used. Third-party advertising providers, including Google, may use cookies to serve ads based on previous visits to this or other websites. Users can manage personalized ads in [Google Ads Settings](https://www.google.com/settings/ads) or visit [YourAdChoices](https://www.aboutads.info/choices/). We will provide a legally and geographically appropriate consent solution before serving ads that require consent.
 
 ### Third-party cookies
 
-Embedded content (for example, a YouTube video inside a guide) or links to external sites may set their own cookies when you interact with them. Those are governed by the third party's own cookie and privacy policies - we do not control them. No third-party media loads automatically on our article pages before you interact with it.
+External links and remotely hosted images may involve third-party requests. Any cookies or storage those providers use are governed by their own policies.
 
 ## How to control cookies
 
-You are always in charge:
-
-- **On this site** - use the Accept or Reject buttons on the consent banner. Your choice is remembered; to change it later, clear this site's data in your browser and reload the page.
-- **In your browser** - block or delete cookies entirely in Settings → Privacy (exact path depends on your browser). Blocking the consent cookie simply means the banner shows again on your next visit.
-- **Industry-wide opt-outs** - visit [youronlinechoices.com](https://www.youronlinechoices.com/), [optout.aboutads.info](https://optout.aboutads.info/) or your device's advertising settings.
-
-Note: disabling all cookies can affect how other websites behave, not this one - our guides remain fully readable either way.
+You can review, block, or delete cookies in your browser's privacy settings. Blocking cookies may affect other websites and services.
 
 ## Do Not Track
 
-There is no agreed industry standard for responding to browser Do Not Track signals, so we do not change our behavior when we receive one. The consent banner is our mechanism for your choice.
+There is no agreed industry standard for responding to browser Do Not Track signals, so the site does not currently change its behavior when it receives one.
 
 ## Updates to this policy
 
-When we add, remove or change a cookie, we update the table above and the date at the top of this page. Significant changes will be announced on the homepage for at least 14 days.
+When the site's use of cookies or storage changes, we will update this policy and the date shown in the page header.
 
 ## Contact
 
