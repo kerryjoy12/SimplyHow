@@ -418,7 +418,7 @@ p { margin: 0 0 1.15rem; }
   position: relative;
   display: block;
   width: fit-content;
-  min-width: min(100%, 360px);
+  min-width: min(100%, 640px);
   max-width: min(900px, 100%);
   min-height: 0;
   padding: 0;
