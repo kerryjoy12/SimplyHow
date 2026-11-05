@@ -183,3 +183,5 @@ That is not surrender. It is realism. A low-energy day handled wisely can still 
 ## The Bottom Line
 
 Managing energy is often more effective than trying to squeeze more time out of the day. Notice your natural patterns, match tasks to your capacity, protect your best hours, take breaks early, and respect recovery. When you treat energy as a real resource instead of assuming endless output, your work usually becomes more sustainable and more effective than when you manage only the clock.
+
+Small adjustments made consistently often work better than forcing a schedule that ignores how you feel.

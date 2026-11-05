@@ -224,3 +224,5 @@ Most of these are easy to avoid if you keep the first bed modest and practical.
 ## The Bottom Line
 
 A beginner raised bed is easiest when it is built with a simple frame, a size you can reach into comfortably, and a fill that is affordable, fertile, and suitable for the plants you want to grow. Choose a good site, make the frame square and sturdy, prepare the ground below, fill the bed thoughtfully, and use a soil mix that gives roots a good home. If you keep the first bed practical rather than ambitious, you end up with a garden space that is easy to use and easy to improve later.
+
+If you are deciding what to plant, our [guide to starting a vegetable garden](/posts/how-to-start-a-vegetable-garden/) can help you choose crops. You can also learn [how to compost at home](/posts/how-to-compost-at-home/) and use a [garden journal](/posts/how-to-start-and-maintain-a-garden-journal/) to track what grows well.

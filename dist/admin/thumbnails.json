@@ -9,26 +9,6 @@
       "coverImage": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&q=80&auto=format&fit=crop"
     },
     {
-      "slug": "how-to-build-a-beginner-raised-bed",
-      "coverImage": "/uploads/how-to-build-a-beginner-raised-bed.webp"
-    },
-    {
-      "slug": "how-to-build-a-simple-shelf",
-      "coverImage": "/uploads/how-to-build-a-simple-shelf.jpg"
-    },
-    {
-      "slug": "how-to-choose-and-maintain-a-good-knife",
-      "coverImage": "/uploads/how-to-choose-and-maintain-a-good-knife.jpg"
-    },
-    {
-      "slug": "how-to-clean-and-organize-your-workshop",
-      "coverImage": "/uploads/how-to-clean-and-organize-your-workshop.jpg"
-    },
-    {
-      "slug": "how-to-clean-grout-and-caulk-like-a-pro",
-      "coverImage": "/uploads/how-to-clean-grout-and-caulk-like-a-pro.jpg"
-    },
-    {
       "slug": "how-to-connect-a-wireless-printer",
       "coverImage": "https://images.unsplash.com/photo-1581094131552-74b7c79cca3c?w=1200&q=80&auto=format&fit=crop"
     },
@@ -49,16 +29,84 @@
       "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80&auto=format&fit=crop"
     },
     {
-      "slug": "how-to-fix-a-squeaky-door",
-      "coverImage": "/uploads/how-to-fix-a-squeaky-door.jpg"
-    },
-    {
       "slug": "how-to-free-up-space-on-your-android-phone",
       "coverImage": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&q=80&auto=format&fit=crop"
     },
     {
       "slug": "how-to-improve-wifi-signal-throughout-your-house",
       "coverImage": "https://images.unsplash.com/photo-1558098329-a11cff621c80?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-make-a-website",
+      "coverImage": "https://images.unsplash.com/photo-1497366216548-633587f6b108?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-overcome-procrastination",
+      "coverImage": "https://images.unsplash.com/photo-1478115041060-422e7f0a3270?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-plan-your-week",
+      "coverImage": "https://images.unsplash.com/photo-1487654896293-20c9e00c3e5e?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-recover-deleted-files",
+      "coverImage": "https://images.unsplash.com/photo-1533908515957-6b549f5daee8?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-secure-your-home-wifi-network",
+      "coverImage": "https://images.unsplash.com/photo-1558098329-a11cff621c80?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-set-up-dual-monitors",
+      "coverImage": "https://images.unsplash.com/photo-1593284625817-2078b34d7a3c?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-set-up-parental-controls",
+      "coverImage": "https://images.unsplash.com/photo-1571260899304-425eee4c7ebf?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-speed-up-a-slow-laptop",
+      "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-start-a-youtube-channel",
+      "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-take-effective-notes",
+      "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28678136?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-transfer-whatsapp-chats-to-a-new-phone",
+      "coverImage": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-use-google-drive",
+      "coverImage": "https://images.unsplash.com/photo-1581094131552-74b7c79cca3c?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-build-a-beginner-raised-bed",
+      "coverImage": "/uploads/how-to-build-a-beginner-raised-bed.jpg"
+    },
+    {
+      "slug": "how-to-build-a-simple-shelf",
+      "coverImage": "/uploads/how-to-build-a-simple-shelf.jpg"
+    },
+    {
+      "slug": "how-to-choose-and-maintain-a-good-knife",
+      "coverImage": "/uploads/how-to-choose-and-maintain-a-good-knife.jpg"
+    },
+    {
+      "slug": "how-to-clean-and-organize-your-workshop",
+      "coverImage": "/uploads/how-to-clean-and-organize-your-workshop.jpg"
+    },
+    {
+      "slug": "how-to-clean-grout-and-caulk-like-a-pro",
+      "coverImage": "/uploads/how-to-clean-grout-and-caulk-like-a-pro.jpg"
+    },
+    {
+      "slug": "how-to-fix-a-squeaky-door",
+      "coverImage": "/uploads/how-to-fix-a-squeaky-door.jpg"
     },
     {
       "slug": "how-to-make-a-beginner-sketchbook-page",
@@ -77,80 +125,200 @@
       "coverImage": "/uploads/how-to-make-a-simple-candle-at-home.jpg"
     },
     {
-      "slug": "how-to-make-a-website",
-      "coverImage": "https://images.unsplash.com/photo-1497366216548-633587f6b108?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
       "slug": "how-to-make-natural-home-fragrances",
       "coverImage": "/uploads/how-to-make-natural-home-fragrances.jpg"
-    },
-    {
-      "slug": "how-to-overcome-procrastination",
-      "coverImage": "https://images.unsplash.com/photo-1478115041060-422e7f0a3270?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
-      "slug": "how-to-plan-your-week",
-      "coverImage": "https://images.unsplash.com/photo-1487654896293-20c9e00c3e5e?w=1200&q=80&auto=format&fit=crop"
     },
     {
       "slug": "how-to-prune-and-trim-your-houseplants",
       "coverImage": "/uploads/how-to-prune-and-trim-your-houseplants.jpg"
     },
     {
-      "slug": "how-to-recover-deleted-files",
-      "coverImage": "https://images.unsplash.com/photo-1533908515957-6b549f5daee8?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
       "slug": "how-to-remove-mold-safely-at-home",
       "coverImage": "/uploads/how-to-remove-mold-safely-at-home.jpg"
-    },
-    {
-      "slug": "how-to-secure-your-home-wifi-network",
-      "coverImage": "https://images.unsplash.com/photo-1558098329-a11cff621c80?w=1200&q=80&auto=format&fit=crop"
     },
     {
       "slug": "how-to-set-up-a-workshop-lighting-system",
       "coverImage": "/uploads/how-to-set-up-a-workshop-lighting-system.jpg"
     },
     {
-      "slug": "how-to-set-up-dual-monitors",
-      "coverImage": "https://images.unsplash.com/photo-1593284625817-2078b34d7a3c?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
-      "slug": "how-to-set-up-parental-controls",
-      "coverImage": "https://images.unsplash.com/photo-1571260899304-425eee4c7ebf?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
-      "slug": "how-to-speed-up-a-slow-laptop",
-      "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
       "slug": "how-to-start-a-home-diy-project",
       "coverImage": "/uploads/how-to-start-a-home-diy-project.jpg"
-    },
-    {
-      "slug": "how-to-start-a-youtube-channel",
-      "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80&auto=format&fit=crop"
     },
     {
       "slug": "how-to-start-and-maintain-a-garden-journal",
       "coverImage": "/uploads/how-to-start-and-maintain-a-garden-journal.jpg"
     },
     {
-      "slug": "how-to-take-effective-notes",
-      "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28678136?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
-      "slug": "how-to-transfer-whatsapp-chats-to-a-new-phone",
-      "coverImage": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&q=80&auto=format&fit=crop"
-    },
-    {
       "slug": "how-to-use-basic-hand-tools-safely",
       "coverImage": "/uploads/how-to-use-basic-hand-tools-safely.jpg"
     },
     {
-      "slug": "how-to-use-google-drive",
-      "coverImage": "https://images.unsplash.com/photo-1581094131552-74b7c79cca3c?w=1200&q=80&auto=format&fit=crop"
+      "slug": "how-to-bake-sourdough-bread-for-beginners",
+      "coverImage": "/uploads/how-to-bake-sourdough-bread-for-beginners.jpg"
+    },
+    {
+      "slug": "how-to-cook-perfect-rice",
+      "coverImage": "/uploads/how-to-cook-perfect-rice.jpg"
+    },
+    {
+      "slug": "how-to-make-a-gourmet-grilled-cheese",
+      "coverImage": "/uploads/how-to-make-a-gourmet-grilled-cheese.jpg"
+    },
+    {
+      "slug": "how-to-make-a-simple-roast-chicken",
+      "coverImage": "/uploads/how-to-make-a-simple-roast-chicken.jpg"
+    },
+    {
+      "slug": "how-to-make-a-simple-tomato-sauce",
+      "coverImage": "/uploads/how-to-make-a-simple-tomato-sauce.jpg"
+    },
+    {
+      "slug": "how-to-make-homemade-soup-from-leftovers",
+      "coverImage": "/uploads/how-to-make-homemade-soup-from-leftovers.jpg"
+    },
+    {
+      "slug": "how-to-make-perfect-homemade-pizza-at-home",
+      "coverImage": "/uploads/how-to-make-perfect-homemade-pizza-at-home.jpg"
+    },
+    {
+      "slug": "how-to-make-perfect-popcorn-at-home",
+      "coverImage": "/uploads/how-to-make-perfect-popcorn-at-home.jpg"
+    },
+    {
+      "slug": "how-to-reduce-food-waste-at-home",
+      "coverImage": "/uploads/how-to-reduce-food-waste-at-home.jpg"
+    },
+    {
+      "slug": "how-to-canning-for-beginners",
+      "coverImage": "/uploads/how-to-canning-for-beginners.jpg"
+    },
+    {
+      "slug": "how-to-store-bread-to-keep-it-fresh",
+      "coverImage": "/uploads/how-to-store-bread-to-keep-it-fresh.jpg"
+    },
+    {
+      "slug": "how-to-use-a-slow-cooker-for-beginners",
+      "coverImage": "/uploads/how-to-use-a-slow-cooker-for-beginners.jpg"
+    },
+    {
+      "slug": "how-to-assemble-ikea-furniture",
+      "coverImage": "/uploads/how-to-assemble-ikea-furniture.jpg"
+    },
+    {
+      "slug": "how-to-bake-cookies-at-home",
+      "coverImage": "/uploads/how-to-bake-cookies-at-home.jpg"
+    },
+    {
+      "slug": "how-to-build-a-raised-garden-bed",
+      "coverImage": "/uploads/how-to-build-a-raised-garden-bed.jpg"
+    },
+    {
+      "slug": "how-to-clean-glass-windows",
+      "coverImage": "/uploads/how-to-clean-glass-windows.jpg"
+    },
+    {
+      "slug": "how-to-deep-clean-your-house",
+      "coverImage": "/uploads/how-to-deep-clean-your-house.jpg"
+    },
+    {
+      "slug": "how-to-fix-a-running-toilet",
+      "coverImage": "/uploads/how-to-fix-a-running-toilet.jpg"
+    },
+    {
+      "slug": "how-to-freeze-fruits-and-vegetables",
+      "coverImage": "/uploads/how-to-freeze-fruits-and-vegetables.jpg"
+    },
+    {
+      "slug": "how-to-get-rid-of-ants",
+      "coverImage": "/uploads/how-to-get-rid-of-ants.jpg"
+    },
+    {
+      "slug": "how-to-grow-fresh-herbs-in-your-kitchen",
+      "coverImage": "/uploads/how-to-grow-fresh-herbs-in-your-kitchen.jpg"
+    },
+    {
+      "slug": "how-to-make-cold-brew-coffee",
+      "coverImage": "/uploads/how-to-make-cold-brew-coffee.jpg"
+    },
+    {
+      "slug": "how-to-remove-mold-from-your-bathroom",
+      "coverImage": "/uploads/how-to-remove-mold-from-your-bathroom.jpg"
+    },
+    {
+      "slug": "how-to-remove-stains-from-carpet",
+      "coverImage": "/uploads/how-to-remove-stains-from-carpet.jpg"
+    },
+    {
+      "slug": "how-to-store-mushrooms-and-other-specialty-produce",
+      "coverImage": "/uploads/how-to-store-mushrooms-and-other-specialty-produce.jpg"
+    },
+    {
+      "slug": "how-to-unclog-a-drain",
+      "coverImage": "/uploads/how-to-unclog-a-drain.jpg"
+    },
+    {
+      "slug": "how-to-winterize-your-home",
+      "coverImage": "/uploads/how-to-winterize-your-home.jpg"
+    },
+    {
+      "slug": "how-to-bake-bread-at-home",
+      "coverImage": "/uploads/how-to-bake-bread-at-home.jpg"
+    },
+    {
+      "slug": "how-to-compost-at-home",
+      "coverImage": "/uploads/how-to-compost-at-home.jpg"
+    },
+    {
+      "slug": "how-to-fix-a-leaky-faucet",
+      "coverImage": "/uploads/how-to-fix-a-leaky-faucet.jpg"
+    },
+    {
+      "slug": "how-to-grow-herbs-indoors",
+      "coverImage": "/uploads/how-to-grow-herbs-indoors.jpg"
+    },
+    {
+      "slug": "how-to-make-a-smoothie",
+      "coverImage": "/uploads/how-to-make-a-smoothie.jpg"
+    },
+    {
+      "slug": "how-to-make-homemade-pasta",
+      "coverImage": "/uploads/how-to-make-homemade-pasta.jpg"
+    },
+    {
+      "slug": "how-to-meal-prep-for-the-week",
+      "coverImage": "/uploads/how-to-meal-prep-for-the-week.jpg"
+    },
+    {
+      "slug": "how-to-organize-a-small-closet",
+      "coverImage": "/uploads/how-to-organize-a-small-closet.jpg"
+    },
+    {
+      "slug": "how-to-organize-the-kitchen",
+      "coverImage": "/uploads/how-to-organize-the-kitchen.jpg"
+    },
+    {
+      "slug": "how-to-paint-a-room-without-streaks",
+      "coverImage": "/uploads/how-to-paint-a-room-without-streaks.jpg"
+    },
+    {
+      "slug": "how-to-renovate-a-room-on-a-budget",
+      "coverImage": "/uploads/how-to-renovate-a-room-on-a-budget.jpg"
+    },
+    {
+      "slug": "how-to-set-up-a-home-office",
+      "coverImage": "/uploads/how-to-set-up-a-home-office.jpg"
+    },
+    {
+      "slug": "how-to-start-a-vegetable-garden",
+      "coverImage": "/uploads/how-to-start-a-vegetable-garden.jpg"
+    },
+    {
+      "slug": "how-to-store-vegetables-so-they-last-longer",
+      "coverImage": "/uploads/how-to-store-vegetables-so-they-last-longer.jpg"
+    },
+    {
+      "slug": "how-to-tidy-up-the-living-room",
+      "coverImage": "/uploads/how-to-tidy-up-the-living-room.jpg"
     }
   ]
 }
